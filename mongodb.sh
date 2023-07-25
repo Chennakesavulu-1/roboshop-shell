@@ -1,5 +1,5 @@
 echo -e "\e[33m Copy Mongodb Repo File\e[0m"
-cp mongodb.repo /etc/yum.repos.d/mongodb.repo
+cp /home/centos/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongodb.repo
 echo -e "\e[33m installing Mongodb server\e[0m"
 yum install mongodb-org -y
 echo -e "\e[33mUpdate mongoDB listen Adress\e[0m"

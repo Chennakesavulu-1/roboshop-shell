@@ -12,7 +12,7 @@ echo -e "\e[33m Extrated Frontend Content\e[0m"
 cd /usr/share/nginx/html
 unzip /tmp/frontend.zip
 echo -e "\e[33m Update Frontend Configuration\e[0m"
-cp roboshop.conf /etc/nginx/default.d/roboshop.conf
+cp /home/centos/roboshop-shell/roboshop.conf /etc/nginx/default.d/roboshop.conf
 
 #we need to copy config file here
 systemctl enable nginx
