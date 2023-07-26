@@ -6,29 +6,36 @@ app_path="/app"
 app_presetup() {
   echo -e "${color} Add Application User ${nocolor}"
   useradd roboshop &>>$log_file
+  echo $?
+
 
   echo -e "${color} Create application directory${nocolor}"
   rm -rf /app &>>$log_file &>>$log_file
   mkdir /app &>>$log_file &>>$log_file
+  echo $?
 
   echo -e "${color} Download Application Content${nocolor}"
   curl -o /tmp/$component.zip https://roboshop-artifacts.s3.amazonaws.com/$component.zip &>>$log_file
   cd ${app_path} &>>$log_file
+  echo $?
 
   echo -e "${color} Extract Application content${nocolor}"
   unzip /tmp/$component.zip &>>$log_file
   cd ${app_path} &>>$log_file
+  echo $?
 
 }
 
 systemd_setup() {
   echo -e "${color} Setup systemD service ${nocolor}"
   cp /home/centos/roboshop-shell/$component.service /etc/systemd/system/$component.service &>>$log_file
+  echo $?
 
   echo -e "${color} Start $component Service${nocolor}"
   systemctl daemon-reload &>>$log_file
   systemctl enable $component &>>$log_file
   systemctl restart $component &>>$log_file
+  echo $?
 }
 
 nodejs() {
@@ -90,12 +97,14 @@ maven() {
 python() {
   echo -e "${color} Install Python${nocolor}"
   yum install python36 gcc python3-devel -y &>>$log_file
+  echo $?
 
   app_presetup
 
   echo -e "${color} Install application dependencies${nocolor}"
   cd /app
   pip3.6 install -r requirements.txt &>>$log_file
+  echo $?
 
   systemd_setup
 
