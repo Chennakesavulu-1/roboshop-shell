@@ -1,12 +1,18 @@
-echo -e "\e[33m Disabel mysql version \e[0m"
+source=common.sh
+echo -e "${color} Disabel mysql version ${nocolor}"
 yum module disable mysql -y &>>/tmp/roboshop.log
-echo -e "\e[33m Copy mysql repo file\e[0m"
+stat_check $?
+echo -e "${color} Copy mysql repo file${nocolor}"
 cp /home/centos/roboshop-shell/mysql.repos /etc/yum.repos.d/mysql.repo
+stat_check $?
 
-echo -e "\e[33m Install mysql community server\e[0m"
+echo -e "${color} Install mysql community server${nocolor}"
 yum install mysql-community-server -y &>>/tmp/roboshop.log
-echo -e "\e[33m  start mysql service\e[0m"
+stat_check $?
+echo -e "${color}  start mysql service${nocolor}"
 systemctl enable mysql
 systemctl restart mysql
-echo -e "\e[33m Setup mysql Password\e[0m"
+stat_check $?
+echo -e "${color} Setup mysql Password${nocolor}"
 mysql_secure_installation --set-root-pass RoboShop@1 &>>/tmp/roboshop.log
+stat_check $?
